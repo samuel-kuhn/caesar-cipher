@@ -17,3 +17,17 @@ This is a simple tool to crack a message encrypted with the caesar cipher method
 usage: crack-the-ceasar.py [-h] [-o OUTPUT] textfile
 crack-the-ceasar.py: error: the following arguments are required: textfile
 ```
+
+## Examples:
+
+```
+python3 caesar-cipher.py cipher 5 ASCII.txt -o ASCII.txt.ciphered
+```
+
+Cipher the contents of ```ASCII.txt``` to the file ```ASCII.txt.ciphered``` (see sample file).
+
+```
+python3 crack-the-caesar.py secret.txt -o output.txt
+```
+
+Try all 26 combinations on the ```secret.txt``` file and write to ```output.txt``` (see sample file).
