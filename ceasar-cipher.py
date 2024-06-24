@@ -12,6 +12,7 @@ args = parser.parse_args()
 
 
 #read the whole file at once
+alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 input = open(args.textfile, "r")
 content = input.read()
 input.close()
@@ -22,15 +23,18 @@ shift = args.shift
 
 #shift the text
 for x in range(len(content)):
-    dec = ord(content[x])
-    if (dec < 65 or (dec < 97 and dec > 90) or dec > 122):
-        shifted += content[x]
-    elif (args.mode == "cipher"):
-        if (dec > 90): shifted += chr((dec+shift-97)%26+97) #Kleinbuchstabe
-        else: shifted += chr((dec+shift-65)%26+65) #Grossbuchtabe
-    else:
-        if (dec > 90): shifted += chr((dec-shift-97)%26+97) #Kleinbuchstabe
-        else: shifted += chr((dec-shift-65)%26+65) #Grossbuchtabe
+    if content[x] == " ":
+        shifted += " "
+    elif content[x] == "\n":
+        shifted += "\n"
+    if (args.mode == "cipher"):
+        for i in range(26):
+            if alphabet[i] == content[x]:
+                shifted += str(alphabet[(i+shift) % 26])
+    elif (args.mode == "decipher"):
+        for i in range(26):
+            if alphabet[i] == content[x]:
+                shifted += str(alphabet[(i-shift) % 26])
 
 
 #output result to a file
