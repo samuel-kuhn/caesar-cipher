@@ -1,5 +1,4 @@
 print("\nThis is a simple tool to cipher/decipher messages with the ceasar cipher method \n \n")
-#version 2.0
 
 #parsed arguments
 import argparse
@@ -21,14 +20,14 @@ shift = args.shift
 
 
 #shift the text
-for x in range(len(content)):
-    dec = ord(content[x])
+for x in content:
+    dec = ord(x)
     if (dec < 65 or (dec < 97 and dec > 90) or dec > 122):
-        shifted += content[x]
-    elif (args.mode == "cipher"):
+        shifted += x
+    elif (args.mode == "cipher"): #cipher
         if (dec > 90): shifted += chr((dec+shift-97)%26+97) #Kleinbuchstabe
         else: shifted += chr((dec+shift-65)%26+65) #Grossbuchtabe
-    else:
+    else: #decipher
         if (dec > 90): shifted += chr((dec-shift-97)%26+97) #Kleinbuchstabe
         else: shifted += chr((dec-shift-65)%26+65) #Grossbuchtabe
 
