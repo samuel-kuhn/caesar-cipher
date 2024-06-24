@@ -1,5 +1,5 @@
-print("\nThis is a simple tool to crack a message encrypted with the ceasar cipher method. \n \n")
-#version 1.0
+print("\nThis is a simple tool to crack a message encrypted with the caesar cipher method. \n \n")
+#version 2.0
 
 #parsed arguments
 import argparse
@@ -14,7 +14,6 @@ alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q",
 input = open(args.textfile, "r")
 content = input.read()
 input.close()
-shifted = ""
 
 #try every number
 output = open(args.output, "w")
@@ -24,13 +23,12 @@ output = open(args.output, "a")
 for shift in range(26):
     output.write("Shifts: " + str(shift) + "\n \n")
     for x in range(len(content)):
-        if content[x] == " ":
-            output.write(" ")
-        elif content[x] == "\n":
-            output.write("\n")
-        for i in range(26):
-            if alphabet[i] == content[x]:
-                output.write(alphabet[(i-shift) % 26])
+        dec = ord(content[x])
+        if (dec < 65 or (dec < 97 and dec > 90) or dec > 122):
+            output.write(content[x])
+        elif (dec > 90): output.write(chr((dec-shift-97)%26+97)) #lower case
+        else: output.write(chr((dec-shift-65)%26+65)) #upper case
+
     output.write("\n")
 
 
